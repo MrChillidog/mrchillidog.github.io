@@ -1,0 +1,117 @@
+<!-- Bank Account Activity Deposits and Withdrawals -->
+<! DOCTYPE html>
+	<head>
+		<title>Bank Account Activity</title>
+	</head>
+	<body>
+		<!--This draws the canvas on the webpage -->
+		<canvas id="mycanvas"<</canva>
+	</body>
+	
+	<!-- Include the processing.js library -->
+	<!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+	<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+	<script>
+		var programCode = function(processingInstance) {
+			with (processingInstance) {
+				size(850, 1100);
+				frameRate(30);
+				
+				//Defining "Transaction" class
+				var Transaction = function(date, amount, affectsBalance, description) {
+					this.date = date;
+					this.amount = amount;
+					this.affectsBalance = affectsBalance;
+					this.description = description;
+				};
+
+				// Paste code from Khan Academy here:
+				background(255, 255, 255);
+				// rect(0, 0, 850, 1100);
+				rect(50, 50, 750, 1000);
+
+				textSize(35);
+				fill(0, 0, 0);
+				text("Bank of Jurupa Valley", 75, 95);
+
+				//Account Number
+				textSize(20);
+				textAlign(RIGHT);
+				text("Account Number: 1234 5678 9101", 775, 140);
+
+
+				//Account Summary
+				textAlign(LEFT);
+				text("Eric Hidalgo", 75, 200);
+				text("Starting balance as of 2/29: ", 75, 230);
+				text("Total Deposits: ", 75, 260);
+				text("Total ATM Withdrawals and Debits: ", 75, 290);
+				text("Total Checks: ", 75, 320);
+				text("Total Service Charges: ", 75, 350);
+				text("Ending balance as of 3/31: ", 75, 380);
+				
+				//Account Summary - Amounts
+				text("$525.50", 410, 230);
+				var balance = 525.50;
+				text("$4,125.75", 410, 260);
+				text("-$1,875.25", 410, 290);
+				text("-$2,250.50", 410, 320);
+				text("-$5.00", 410, 350);
+				text("$520.50", 410, 380);
+
+				//Draw table of account activity (total width = 730)
+				fill(255, 255, 255);
+				//Date
+				rect(60, 420, 100, 30);
+				rect(160, 420, 250, 30);
+				rect(410, 420, 140, 30);
+				rect(550, 420, 140, 30);
+				rect(690, 420, 100, 30);
+				rect(60, 450, 730, 580);
+				
+				//Column headings
+				fill(0, 0, 0);
+				textSize(20);
+				text("Date", 90, 442);
+				text("Description", 230, 442);
+				text("Deposit", 445, 442);
+				text("Withdrawal", 570, 442);
+				text("Balance", 705, 442);
+
+				//Transactions
+				var directDeposit = new Transaction("3/1", 3625.75, true, "Direct Deposit - JUSD");
+				var rent = new Transaction("3/2", 1725.75, false, "Check - Vesada Apt");
+				var electricityBill = new Transaction("3/2", 149.50, false, "Check - Electricity");
+				var carPayment = new Transaction("3/10", 375.25, false, "Check - Car");
+				var atmWithdrawal = new Transaction("3/12", 300.00, false, "ATM Cash With");
+				var outOfNetwork = new Transaction("3/12", 5.00, false, "Out of Network ATM 3/12");
+				var transferToSavings = new Transaction("3/15", 1575.25, false, "Transfer to Savings");
+				var atmDeposit = new Transaction("3/20", 500.00, true, "ATM Cash Deposit");
+
+				var activity = [directDeposit, rent, electricityBill, carPayment, atmWithdrawal, outOfNetwork, transferToSavings, atmDeposit];
+
+				//Fill in table with activity 
+				for (var i = 0; i < activity.length; i++) {
+					text(activity[i].date, 90, (i*30)+472);
+					text(activity[i].description, 180, (i*30)+472);
+					
+					if (activity[i].affectsBalance) {
+						text("$" + activity[i].amount, 445, (i*30)+472);
+						balance += activity[i].amount;
+					}
+					else {
+						text("-$" + activity[i].amount, 570, (i*30)+472);
+						balance -= activity[i].amount;	
+					}
+					
+					text("$" + balance, 705, (i*30)+472);
+				}
+
+		}};
+
+		//Get the canvas that ProcessingJS will use
+		var canvas = document.getElementById("mycanvas");
+		// Pass the function to ProcessingJS constructor
+		var processingInstance = new Processing(canvas, programCode);
+	</script>
+</html>
