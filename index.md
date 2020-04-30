@@ -111,4 +111,4 @@
 		<li>Easter bunny</li>
 	</ol>
 
-	<p>Here is a linkg to a page about <a href="mrchillidog.github.io/all about cats.html"> cats.</a></p>
+	Here is a link to a page about <a href="mrchillidog.github.io/all about cats.html"> cats.</a><
