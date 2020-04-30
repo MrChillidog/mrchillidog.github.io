@@ -38,7 +38,6 @@
 
 			#rabbits-info {
 				color: purple;
-				font-weight: bold;
 				text-decoration: underline;
 			}
 
