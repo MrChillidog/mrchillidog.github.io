@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -113,5 +112,4 @@
 		<li>Easter bunny</li>
 	</ol>
 
-	</body>
-</html>
+
